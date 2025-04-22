@@ -10,7 +10,7 @@ void inputArray(int *arr, int length, FILE *file) {
         arr[i1] = rand() % 100;
         fprintf(file, "%d ", arr[i1]); // Запись в файл
     }
-    fprintf(file, "\n");
+    fprintf(file, "\n"); //student2
 }
 
 // Функция для вывода исходных массивов
