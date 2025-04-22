@@ -4,47 +4,54 @@
 #include <math.h>
 
 // Функция для ввода исходных массивов и записи их в файл
-void inputArray(int *arr, int length, FILE *file) {
+void inputArray(int* arr, int length, FILE* file) {
     srand(time(NULL));
-    for (int i1 = 0; i1 < length; i1++) {
-        arr[i1] = rand() % 100;
-        fprintf(file, "%d ", arr[i1]); // Запись в файл
+    int i; // переменная выполняет роль счётчика в цикле 
+    for (i = 0; i < length; i++) {
+        arr[i] = rand() % 100;
+        fprintf(file, "%d ", arr[i]); // Запись в файл
     }
-    fprintf(file, "\n"); //student2
+    fprintf(file, "\n"); // student2 
 }
 
 // Функция для вывода исходных массивов
-void printArray(int *arr, int length) {
-    for (int i1 = 0; i1 < length; i1++) {
-        printf("M[%d] = %d\n", i1, arr[i1]);
+void printArray(int* arr, int length) {
+    int i;
+    for (i = 0; i < length; i++) {
+        printf("M[%d] = %d\n", i, arr[i]);
     }
 }
 
 // Функция для вычисления среднего геометрического
-double geometricMean(int *arr, int length) {
+double geometricMean(int* arr, int length) {
     double numProduct = 1.0;
-    for (int i1 = 0; i1 < length; i1++) {
-        numProduct *= arr[i1];
+    int i;
+    for (i = 0; i < length; i++) {
+        numProduct *= arr[i];
     }
     return pow(numProduct, 1.0 / length);
 }
 
 // Функция для ввода исходных массивов 2D и записи их в файл
-void inputArray2(int *arr, int rows, int cols, FILE *file) {
+void inputArray2(int* arr, int rows, int cols, FILE* file) {
     srand(time(NULL));
-    for (int i1 = 0; i1 < rows; i1++) {
-        for (int j1 = 0; j1 < cols; j1++) {
-            *(arr + i1 * cols + j1) = (rand() % 100 + 1) * (rand() % 2 == 0 ? 1 : -1);
-            fprintf(file, "%4d ", *(arr + i1 * cols + j1)); // Запись в файл
+    int i;
+    int j;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            *(arr + i * cols + j) = (rand() % 100 + 1) * (rand() % 2 == 0 ? 1 : -1);
+            fprintf(file, "%4d ", *(arr + i * cols + j)); // Запись в файл
         }
         fprintf(file, "\n");
     }
 }
 
 // Функция для вывода исходных массивов 2D
-void printArray2(int *arr, int rows, int cols) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+void printArray2(int* arr, int rows, int cols) {
+    int i;
+    int j;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
             printf("%4d", *(arr + i * cols + j));
         }
         printf("\n");
@@ -52,16 +59,20 @@ void printArray2(int *arr, int rows, int cols) {
 }
 
 // Функция для подсчета изменений знака в массиве
-int countSignChanges(int *arr, int rows, int cols) {
+int countSignChanges(int* arr, int rows, int cols) {
     int signChanges = 0;
     int lastEl = *arr;
+    int i;
+    int j;
+    int currentEl;
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            int currentEl = *(arr + i * cols + j);
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            currentEl = *(arr + i * cols + j);
             if (currentEl > 0 && lastEl < 0) {
                 signChanges++;
-            } else if (currentEl < 0 && lastEl > 0) {
+            }
+            else if (currentEl < 0 && lastEl > 0) {
                 signChanges++;
             }
             lastEl = currentEl;
@@ -73,7 +84,9 @@ int countSignChanges(int *arr, int rows, int cols) {
 
 int main(void) {
     // Открытие файла для записи исходных данных и результатов
-    FILE *file = fopen("output.txt", "w");
+    FILE* file;
+    file = fopen("output.txt", "w");
+
     if (file == NULL) {
         printf("Ошибка открытия файла!\n");
         return 1;
@@ -81,7 +94,8 @@ int main(void) {
 
     // a) 1 вариант
     int M[10];
-    int length = sizeof(M) / sizeof(M[0]);
+    int length;
+    length = sizeof(M) / sizeof(M[0]);
 
     // а) Ввод исходных массивов и запись в файл
     fprintf(file, "Исходный массив 1:\n");
@@ -92,7 +106,8 @@ int main(void) {
     printArray(M, length);
 
     // в) Обработка массивов в соответствии с заданием
-    double average = geometricMean(M, length);
+    double average;
+    average = geometricMean(M, length);
 
     // г) Вывод результатов с соответствующими комментариями и запись в файл
     printf("Среднее геометрическое: %.6f\n", average);
@@ -113,7 +128,8 @@ int main(void) {
     printArray2(&M2[0][0], rows, cols);
 
     // в) Обработка массивов в соответствии с заданием
-    int signChanges = countSignChanges(&M2[0][0], rows, cols);
+    int signChanges;
+    signChanges = countSignChanges(&M2[0][0], rows, cols);
 
     // г) Вывод результатов с соответствующими комментариями и запись в файл
     printf("Изменений знака в массиве: %d\n", signChanges);
@@ -124,7 +140,9 @@ int main(void) {
 
     // Вывод содержимого файла на экран
     printf("\nСодержимое файла output.txt:\n");
-    FILE *readFile = fopen("output.txt", "r");
+    FILE* readFile;
+    readFile = fopen("output.txt", "r");
+
     if (readFile == NULL) {
         printf("Ошибка открытия файла для чтения!\n");
         return 1;
