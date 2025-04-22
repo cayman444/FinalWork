@@ -6,25 +6,25 @@
 // Функция для ввода исходных массивов и записи их в файл
 void inputArray(int *arr, int length, FILE *file) {
     srand(time(NULL));
-    for (int i = 0; i < length; i++) {
-        arr[i] = rand() % 100;
-        fprintf(file, "%d ", arr[i]); // Запись в файл
+    for (int i1 = 0; i1 < length; i1++) {
+        arr[i1] = rand() % 100;
+        fprintf(file, "%d ", arr[i1]); // Запись в файл
     }
     fprintf(file, "\n");
 }
 
 // Функция для вывода исходных массивов
 void printArray(int *arr, int length) {
-    for (int i = 0; i < length; i++) {
-        printf("M[%d] = %d\n", i, arr[i]);
+    for (int i1 = 0; i1 < length; i1++) {
+        printf("M[%d] = %d\n", i1, arr[i1]);
     }
 }
 
 // Функция для вычисления среднего геометрического
 double geometricMean(int *arr, int length) {
     double numProduct = 1.0;
-    for (int i = 0; i < length; i++) {
-        numProduct *= arr[i];
+    for (int i1 = 0; i1 < length; i1++) {
+        numProduct *= arr[i1];
     }
     return pow(numProduct, 1.0 / length);
 }
@@ -32,10 +32,10 @@ double geometricMean(int *arr, int length) {
 // Функция для ввода исходных массивов 2D и записи их в файл
 void inputArray2(int *arr, int rows, int cols, FILE *file) {
     srand(time(NULL));
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            *(arr + i * cols + j) = (rand() % 100 + 1) * (rand() % 2 == 0 ? 1 : -1);
-            fprintf(file, "%4d ", *(arr + i * cols + j)); // Запись в файл
+    for (int i1 = 0; i1 < rows; i1++) {
+        for (int j1 = 0; j1 < cols; j1++) {
+            *(arr + i1 * cols + j1) = (rand() % 100 + 1) * (rand() % 2 == 0 ? 1 : -1);
+            fprintf(file, "%4d ", *(arr + i1 * cols + j1)); // Запись в файл
         }
         fprintf(file, "\n");
     }
